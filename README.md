@@ -1,7 +1,36 @@
 # Medications App
 
 A PHP and MySQL application that stores and retrieves medication data in a normalized database structure, producing exact JSON output as specified.
-## OUTPUT##
+
+                                               TABLE SCHEMA UML REPRESENTATION
+                              ───────────────────────────────────────────────────────────────────────────────
+                              
+                              ┌──────────────────┐        ┌─────────────────────┐        ┌──────────────────┐
+                              │   medications    │        │ medication_classes  │        │ class_name_groups│
+                              ├──────────────────┤        ├─────────────────────┤        ├──────────────────┤
+                              │ □ id (PK)        │1     * │ □ id (PK)           │1     * │ □ id (PK)        │
+                              │ □ created_at     │━━━━━━━▶│ □ medication_id (FK)│━━━━━━━▶│ □ class_id (FK)  │
+                              └──────────────────┘        │ □ class_name        │        │ □ group_name     │
+                                       │                  └─────────────────────┘        └──────────────────┘
+                                       │ COMPOSITION              │ COMPOSITION                  │ COMPOSITION
+                                       │ (CASCADE DELETE)         │ (CASCADE DELETE)             │ (CASCADE DELETE)
+                                       ▽                          ▽                              ▽
+                                  Parent Table                Child Table                    Child Table
+                                                                                              │
+                                                                                              │ 1
+                                                                                              │
+                                                                                              ▽
+                                                                                  ┌────────────────────────┐
+                                                                                  │   associated_drugs     │
+                                                                                  ├────────────────────────┤
+                                                                                  │ □ id (PK)              │
+                                                                                  │ □ group_id (FK)        │
+                                                                                  │ □ drug_type            │
+                                                                                  │ □ name                 │
+                                                                                  │ □ dose                 │
+                                                                                  │ □ strength             │
+                                                                                  └────────────────────────┘
+## OUTPUT ##
 <<img width="953" height="539" alt="Screenshot 2025-09-30 190152" src="https://github.com/user-attachments/assets/36fc4814-814e-4ce1-a1de-78e46aa56353" /> 
 <img width="955" height="500" alt="vrifyOutput" src="https://github.com/user-attachments/assets/958e7e77-0a67-45da-8717-a4cc76a64643" />
 <img width="560" height="413" alt="p2" src="https://github.com/user-attachments/assets/49c5fba1-7a5e-4ec6-a885-09e8f1f03d80" /> 
